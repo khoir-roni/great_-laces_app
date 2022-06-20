@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:path/path.dart' as path; // for Construction or combining path
+import 'package:path_provider/path_provider.dart'
+    as sys_paths; // for finding path
+
 class ImageInput extends StatefulWidget {
   ImageInput({Key? key}) : super(key: key);
 
@@ -20,6 +24,15 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.camera,
       maxHeight: 600,
     );
+    setState(
+      () {
+        _storedImage = File(imageFile!.path); // convert XFile to regular file
+      },
+    );
+    final appDir = await sys_paths.getApplicationDocumentsDirectory();
+    final fileName = path.basename(imageFile!.path);
+    final imageFilePatch = imageFile as File;
+   final saveImage = await imageFilePatch.copy('${appDir.path}/$fileName');
   }
 
   @override
