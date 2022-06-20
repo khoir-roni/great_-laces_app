@@ -8,7 +8,9 @@ import 'package:path_provider/path_provider.dart'
     as sys_paths; // for finding path
 
 class ImageInput extends StatefulWidget {
-  ImageInput({Key? key}) : super(key: key);
+  final Function? onSelectImage;
+
+  ImageInput({Key? key,  this.onSelectImage}) : super(key: key);
 
   @override
   State<ImageInput> createState() => _ImageInputState();
@@ -16,6 +18,7 @@ class ImageInput extends StatefulWidget {
 
 class _ImageInputState extends State<ImageInput> {
   File? _storedImage;
+
   final _picker = ImagePicker();
   Future<void> _takePicture() async {
     // ImagePicker
@@ -32,7 +35,8 @@ class _ImageInputState extends State<ImageInput> {
     final appDir = await sys_paths.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile!.path);
     final imageFilePatch = imageFile as File;
-   final saveImage = await imageFilePatch.copy('${appDir.path}/$fileName');
+    final savedImage = await imageFilePatch.copy('${appDir.path}/$fileName');
+    widget.onSelectImage!(savedImage);
   }
 
   @override
