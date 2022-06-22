@@ -27,7 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  # cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   image_picker: ^0.8.5+3
@@ -37,7 +37,7 @@ dependencies:
   provider: ^6.0.3
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 

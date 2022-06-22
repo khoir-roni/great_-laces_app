@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/great_places.dart';
 
 class PlaceListScreen extends StatelessWidget {
-  const PlaceListScreen({Key? key}) : super(key: key);
+  const PlaceListScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +22,20 @@ class PlaceListScreen extends StatelessWidget {
       ),
       body: Consumer<GreatPlaces>(
         builder: (context, greatPlaces, ch) => greatPlaces.items.length <= 0
-            ? ch!
+            ? ch
             : ListView.builder(
                 itemCount: greatPlaces.items.length,
                 itemBuilder: (ctx, i) => ListTile(
                   leading: CircleAvatar(
                     backgroundImage: FileImage(greatPlaces.items[i].image),
                   ),
+                  title: Text(greatPlaces.items[i].title),
                   onTap: (){
-
-                    //goto detail page... 
+                    //go to detail page...
                   },
                 ),
               ),
-        child: const Center(
+        child: Center(
           child: Text('Got no places yet, Start adding some!'),
         ),
       ),

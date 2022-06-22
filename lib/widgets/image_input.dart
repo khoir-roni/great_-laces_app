@@ -10,15 +10,15 @@ import 'package:path_provider/path_provider.dart'
 class ImageInput extends StatefulWidget {
   
 
-  ImageInput({Key? key,  this.onSelectImage}) : super(key: key);
-  final Function? onSelectImage;
+  ImageInput({Key key,  this.onSelectImage}) : super(key: key);
+  final Function onSelectImage;
 
   @override
   State<ImageInput> createState() => _ImageInputState();
 }
 
 class _ImageInputState extends State<ImageInput> {
-  File? _storedImage;
+  File _storedImage;
 
   final _picker = ImagePicker();
   Future<void> _takePicture() async {
@@ -30,14 +30,16 @@ class _ImageInputState extends State<ImageInput> {
     );
     setState(
       () {
-        _storedImage = File(imageFile!.path); // convert XFile to regular file
+        _storedImage = File(imageFile.path); // convert XFile to regular file
       },
     );
     final appDir = await sys_paths.getApplicationDocumentsDirectory();
-    final fileName = path.basename(imageFile!.path);
-    final imageFilePatch = imageFile as File;
+    final fileName = path.basename(imageFile.path);
+    final imageFilePatch = _storedImage ;
     final savedImage = await imageFilePatch.copy('${appDir.path}/$fileName');
-    widget.onSelectImage!(savedImage);
+    print('location = $savedImage');
+  
+    widget.onSelectImage(savedImage);
   }
 
   @override
@@ -53,7 +55,7 @@ class _ImageInputState extends State<ImageInput> {
           alignment: Alignment.center,
           child: _storedImage != null
               ? Image.file(
-                  _storedImage!,
+                  _storedImage,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 )
