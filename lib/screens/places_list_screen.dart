@@ -29,9 +29,13 @@ class PlaceListScreen extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundImage: FileImage(greatPlaces.items[i].image),
                   ),
+                  onTap: (){
+
+                    //goto detail page... 
+                  },
                 ),
               ),
-        child: Center(
+        child: const Center(
           child: Text('Got no places yet, Start adding some!'),
         ),
       ),

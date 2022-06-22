@@ -26,7 +26,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       return; //doing nothing
     }
     Provider.of<GreatPlaces>(context, listen: false)
-        .addPlace(_titleController.text, _pickedImage!);
+        .addPlace(_titleController.text, _pickedImage!);//        
     Navigator.of(context).pop();
   }
 
@@ -61,7 +61,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             ),
           )),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: _savedPlace,
             icon: const Icon(Icons.add),
             label: const Text('Add Place'),
             style: ElevatedButton.styleFrom(

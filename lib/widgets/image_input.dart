@@ -8,9 +8,10 @@ import 'package:path_provider/path_provider.dart'
     as sys_paths; // for finding path
 
 class ImageInput extends StatefulWidget {
-  final Function? onSelectImage;
+  
 
   ImageInput({Key? key,  this.onSelectImage}) : super(key: key);
+  final Function? onSelectImage;
 
   @override
   State<ImageInput> createState() => _ImageInputState();
