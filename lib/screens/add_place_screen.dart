@@ -6,7 +6,7 @@ import '../widgets/image_input.dart';
 import '../providers/great_places.dart';
 
 class AddPlaceScreen extends StatefulWidget {
-  AddPlaceScreen({Key? key}) : super(key: key);
+  AddPlaceScreen({Key key}) : super(key: key);
   static const routeName = 'Add Place Screen';
 
   @override
@@ -15,7 +15,7 @@ class AddPlaceScreen extends StatefulWidget {
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
-  File? _pickedImage;
+  File _pickedImage;
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
@@ -26,7 +26,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       return; //doing nothing
     }
     Provider.of<GreatPlaces>(context, listen: false)
-        .addPlace(_titleController.text, _pickedImage!);//        
+        .addPlace(_titleController.text, _pickedImage);//        
     Navigator.of(context).pop();
   }
 
