@@ -8,9 +8,7 @@ import 'package:path_provider/path_provider.dart'
     as sys_paths; // for finding path
 
 class ImageInput extends StatefulWidget {
-  
-
-  ImageInput({Key key,  this.onSelectImage}) : super(key: key);
+  ImageInput({Key key, this.onSelectImage}) : super(key: key);
   final Function onSelectImage;
 
   @override
@@ -28,6 +26,9 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.camera,
       maxHeight: 600,
     );
+    if (imageFile == null) {
+      return;
+    }
     setState(
       () {
         _storedImage = File(imageFile.path); // convert XFile to regular file
@@ -35,10 +36,10 @@ class _ImageInputState extends State<ImageInput> {
     );
     final appDir = await sys_paths.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
-    final imageFilePatch = _storedImage ;
+    final imageFilePatch = _storedImage;
     final savedImage = await imageFilePatch.copy('${appDir.path}/$fileName');
     print('location = $savedImage');
-  
+
     widget.onSelectImage(savedImage);
   }
 
