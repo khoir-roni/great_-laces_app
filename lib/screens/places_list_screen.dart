@@ -20,24 +20,36 @@ class PlaceListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<GreatPlaces>(
-        builder: (context, greatPlaces, ch) => greatPlaces.items.length <= 0
-            ? ch
-            : ListView.builder(
-                itemCount: greatPlaces.items.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: FileImage(greatPlaces.items[i].image),
+      body: FutureBuilder(
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),//load the data here
+      
+        builder: ( context,  snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: Center(child: CircularProgressIndicator()),
+                  )//if still waiting load circular indicator
+                : Consumer<GreatPlaces>(
+                    builder: (context, greatPlaces, ch) =>
+                        greatPlaces.items.isEmpty
+                            ? ch
+                            : ListView.builder(
+                                itemCount: greatPlaces.items.length,
+                                itemBuilder: (ctx, i) => ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                        FileImage(greatPlaces.items[i].image),
+                                  ),
+                                  title: Text(greatPlaces.items[i].title),
+                                  onTap: () {
+                                    //go to detail page...
+                                  },
+                                ),
+                              ),
+                    child: const Center(
+                      child: Text('Got no places yet, Start adding some!'),
+                    ),
                   ),
-                  title: Text(greatPlaces.items[i].title),
-                  onTap: (){
-                    //go to detail page...
-                  },
-                ),
-              ),
-        child: Center(
-          child: Text('Got no places yet, Start adding some!'),
-        ),
       ),
     );
   }
