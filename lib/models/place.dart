@@ -6,9 +6,9 @@ class PlaceLocation {
   final String address;
 
   const PlaceLocation({
-     this.latitude,
-     this.longitude,
-     this.address,
+    this.latitude,
+    this.longitude,
+    this.address,
   });
 }
 
@@ -19,9 +19,9 @@ class Place {
   final File image;
 
   Place({
-     this.id,
-     this.title,
-     this.location,
-     this.image,
+    this.id,
+    this.title,
+    this.location,
+    this.image,
   });
 }

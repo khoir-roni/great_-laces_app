@@ -9,14 +9,13 @@ class DBHelper {
       path.join(dbPath, 'places.db'),
       onCreate: (db, version) {
         return db.execute(
-            'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT)');
+            'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT,loc_lat REAL, loc_lng REAL, address TEXT)');
       },
       version: 1,
     );
   }
 
   static Future<void> insert(String table, Map<String, Object> data) async {
-    
     final db = await DBHelper.database();
     db.insert(
       table,
