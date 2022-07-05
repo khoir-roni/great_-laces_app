@@ -8,8 +8,8 @@ import '../providers/great_places.dart';
 import '../widgets/location_input.dart';
 
 class AddPlaceScreen extends StatefulWidget {
-  AddPlaceScreen({Key key}) : super(key: key);
   static const routeName = 'Add Place Screen';
+  AddPlaceScreen({Key key}) : super(key: key);
 
   @override
   State<AddPlaceScreen> createState() => _AddPlaceScreenState();
